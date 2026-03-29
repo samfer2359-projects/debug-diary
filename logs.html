@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debug Diary — Bug Archive</title>
+  <meta name="description" content="All debug logs — every bug, every mistake, every painful lesson learned the hard way." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* Add Read Story hint */
+    .read-story-hint {
+      font-size: 0.85rem;
+      color: #5c8f6b;
+      margin-top: 4px;
+      font-style: italic;
+    }
+    .log-card:hover {
+      transform: scale(1.01);
+      transition: transform 0.1s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">~/debug-diary</a>
+      <ul class="nav-links">
+        <li><a href="index.html">[home]</a></li>
+        <li><a href="logs.html" class="active">[logs]</a></li>
+        <li><a href="about.html">[about]</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- ── Page Header ── -->
+    <header class="page-header">
+      <div class="prompt-line">$ ls -l ~/debug-diary/logs/</div>
+      <h1>Bug Archive</h1>
+      <p id="log-count"></p>
+      <p style="margin-top: 8px; color: #5c8f6b; font-size: 0.8rem;">
+      // every entry here once ruined my day
+      </p>
+    </header>
+
+    <!-- ── Log cards (populated by JS) ── -->
+    <div class="logs-grid" id="logs-grid"></div>
+
+    <!-- ── Load More ── -->
+    <div class="load-more-wrap" id="load-more-wrap" style="display:none;">
+      <button class="btn-load-more" id="btn-load-more">
+        $ load --more bugs (<span id="remaining-count"></span> left)
+      </button>
+    </div>
+
+    <p class="end-of-log" id="end-of-log" style="display:none;">— end of log —</p>
+
+  </div>
+
+  <script src="js/logs.js"></script>
+  <script>
+    /* ── Config ── */
+    const INITIAL_COUNT  = 4;
+    const LOAD_MORE_STEP = 2;
+
+    let visibleCount = INITIAL_COUNT;
+
+    const grid         = document.getElementById('logs-grid');
+    const loadMoreWrap = document.getElementById('load-more-wrap');
+    const btnLoadMore  = document.getElementById('btn-load-more');
+    const remainingEl  = document.getElementById('remaining-count');
+    const endEl        = document.getElementById('end-of-log');
+    const countEl      = document.getElementById('log-count');
+
+    countEl.textContent = `${logs.length} entries logged. No survivors.`;
+
+    function escHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function render() {
+      const visible = logs.slice(0, visibleCount);
+
+      grid.innerHTML = visible.map((log, i) => `
+        <a class="log-card" href="log.html?id=${log.id}">
+          <div class="log-card-inner">
+            <span class="log-emoji">${log.emoji}</span>
+            <div class="log-body">
+              <div class="log-title-row">
+                <span class="log-index">[${String(i + 1).padStart(2,'0')}]</span>
+                <span class="log-title">${escHtml(log.title)}.log</span>
+                <span class="status-badge ${log.status}">${log.status}</span>
+              </div>
+              <p class="log-teaser">${escHtml(log.teaser)}</p>
+              <div class="read-story-hint">// click to read full story</div>
+              <div class="log-meta">
+                <div class="tag-list">
+                  ${log.tags.map(t => `<span class="tag">#${escHtml(t)}</span>`).join('')}
+                </div>
+                <span class="log-date">${log.date}</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      `).join('');
+
+      const remaining = logs.length - visibleCount;
+      if (remaining > 0) {
+        loadMoreWrap.style.display = 'block';
+        endEl.style.display = 'none';
+        remainingEl.textContent = remaining;
+      } else {
+        loadMoreWrap.style.display = 'none';
+        endEl.style.display = 'block';
+      }
+    }
+
+    /* ── Load More button ── */
+    btnLoadMore.addEventListener('click', () => {
+      visibleCount = Math.min(visibleCount + LOAD_MORE_STEP, logs.length);
+      render();
+    });
+
+    render();
+
+    if (logs.length === 0) {
+      grid.innerHTML = `
+        <p style="color: #5c8f6b; font-size: 0.85rem;">
+          // no bugs logged yet... suspicious
+        </p>`;
+    }
+
+    document.addEventListener('click', (e) => {
+      const card = e.target.closest('.log-card');
+      if (card) {
+        card.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+          card.style.transform = '';
+        }, 100);
+      }
+    });
+  </script>
+</body>
+</html>

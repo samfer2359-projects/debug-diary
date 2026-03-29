@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debug Diary — About</title>
+  <meta name="description" content="About Debug Diary — a developer's anonymous collection of bugs and lessons learned." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">~/debug-diary</a>
+      <ul class="nav-links">
+        <li><a href="index.html">[home]</a></li>
+        <li><a href="logs.html">[logs]</a></li>
+        <li><a href="about.html" class="active">[about]</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="about-content">
+
+      <div class="page-header">
+        <div class="prompt-line">$ cat about.txt</div>
+      </div>
+
+      <!-- whoami -->
+      <div class="terminal-block">
+        <div class="terminal-prompt">
+          <span class="dollar">guest@debug-diary:~$ </span>
+          <span class="cmd">whoami</span>
+        </div>
+        <div class="terminal-output">
+          A developer. Mostly anonymous. Occasionally breaks things (so you don’t have to).
+        </div>
+      </div>
+
+      <!-- mission -->
+      <div class="terminal-block">
+        <div class="terminal-prompt">
+          <span class="dollar">guest@debug-diary:~$ </span>
+          <span class="cmd">cat mission.txt</span>
+        </div>
+        <div class="terminal-output">
+          <p>
+            Debug Diary exists because coders rarely talk about the mistakes behind the scenes. We share the working projects, the clever solutions, the wins—but keep quiet about the late-night debugging sessions, the stubborn bugs, and the moments that made us question if we really knew what we were doing.
+          </p>
+          <p style="margin-top: 12px;">
+            This is a collection of those moments. The real ones. The confusing ones. The “how did I even write that?” ones. The kind that, in hindsight, seem obvious—but at the time, felt like the computer had its own agenda.
+          </p>
+        </div>
+      </div>
+
+      <!-- philosophy -->
+      <div class="terminal-block">
+        <div class="terminal-prompt">
+          <span class="dollar">guest@debug-diary:~$ </span>
+          <span class="cmd">cat philosophy.txt</span>
+        </div>
+        <div class="terminal-output">
+          <p>
+            Every bug was tackled. Every fix came with a lesson. The frustration eased (eventually). The knowledge mostly stuck.
+          </p>
+          <p style="margin-top: 12px;">
+            If you’ve stumbled over similar mistakes: you’re not alone. If you haven’t yet: don’t worry—you probably will.
+          </p>
+        </div>
+      </div>
+
+      <!-- disclaimer -->
+      <div class="terminal-block">
+        <div class="terminal-prompt">
+          <span class="dollar">guest@debug-diary:~$ </span>
+          <span class="cmd">cat disclaimer.txt</span>
+        </div>
+        <div class="terminal-output">
+          Everything here actually happened. Any resemblance to real-life chaos is purely intentional.
+        </div>
+      </div>
+
+      <!-- blinking cursor -->
+      <div class="terminal-block">
+        <div class="terminal-prompt">
+          <span class="dollar">guest@debug-diary:~$ </span>
+          <span class="terminal-cursor"></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

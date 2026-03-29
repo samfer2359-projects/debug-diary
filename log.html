@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debug Diary — Log</title>
+  <meta name="description" content="A single bug story from the debug diary." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">~/debug-diary</a>
+      <ul class="nav-links">
+        <li><a href="index.html">[home]</a></li>
+        <li><a href="logs.html">[logs]</a></li>
+        <li><a href="about.html">[about]</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Content (populated by JS) ── -->
+  <div class="container">
+    <div id="log-content"></div>
+  </div>
+
+  <script src="js/logs.js"></script>
+  <script>
+    /* ── Read ?id= from URL ── */
+    const params = new URLSearchParams(window.location.search);
+    const logId  = params.get('id');
+    const log    = logs.find(l => l.id === logId);
+
+    const contentEl = document.getElementById('log-content');
+
+    if (!log) {
+      /* 404-style message */
+      document.title = 'Debug Diary — Not Found';
+      contentEl.innerHTML = `
+        <div class="not-found">
+          <div class="error-cmd">$ cat logs/${logId || 'unknown'}</div>
+          <div class="error-msg">Error: No such file or directory</div>
+          <a href="logs.html">← back to logs</a>
+        </div>`;
+    } else {
+      /* Update page title and meta */
+      document.title = `Debug Diary — ${log.title}`;
+
+      /* Status display config */
+      const statusConfig = {
+        resolved: { label: '● RESOLVED' },
+        wip:      { label: '◐ WORK IN PROGRESS' },
+        open:     { label: '○ OPEN' },
+      };
+
+      contentEl.innerHTML = `
+        <div class="log-detail">
+
+          <!-- Breadcrumb -->
+          <div class="breadcrumb">$ cat ~/debug-diary/logs/${log.id}.md</div>
+
+          <!-- Header -->
+          <div class="log-detail-header">
+            <div class="log-detail-title-row">
+              <span class="log-detail-emoji">${log.emoji}</span>
+              <h1 class="log-detail-title">${escHtml(log.title)}</h1>
+            </div>
+            <div class="log-detail-meta">
+              <span>${log.date}</span>
+              <span>·</span>
+              <div class="tag-list">
+                ${log.tags.map(t => `<span class="tag">#${escHtml(t)}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+
+          <!-- Story -->
+          <div class="story-section">
+            <div class="section-marker"># the story</div>
+            <div class="story-body">${renderBody(log.story)}</div>
+          </div>
+
+          <!-- Show Fix toggle -->
+          <div class="fix-toggle-wrap">
+            <button class="btn-show-fix" id="btn-show-fix">[ show fix ]</button>
+            <div class="fix-content hidden" id="fix-content">
+              <div class="section-marker"># the fix</div>
+              <div class="fix-body">${renderBody(log.fix)}</div>
+            </div>
+          </div>
+
+          <!-- Terminal status line -->
+          <div class="status-line ${log.status}">
+            <span class="status-line-label">STATUS:</span>
+            <span class="status-line-value">${statusConfig[log.status].label}</span>
+          </div>
+
+          <!-- Back link -->
+          <a class="back-link" href="logs.html">← back to all logs</a>
+
+        </div>`;
+
+      /* ── Fix toggle ── */
+      const btn     = document.getElementById('btn-show-fix');
+      const fixDiv  = document.getElementById('fix-content');
+      let   showing = false;
+
+      btn.addEventListener('click', () => {
+        showing = !showing;
+        fixDiv.classList.toggle('hidden', !showing);
+        btn.textContent = showing ? '[ hide fix ]' : '[ show fix ]';
+      });
+    }
+
+    /* ── Helpers ── */
+
+    /* Render story/fix text: paragraphs separated by blank lines,
+       with fenced code blocks (``` ... ```) rendered as <pre><code>. */
+    function renderBody(text) {
+      const blocks = text.split(/\n\n+/);
+      return blocks.map(block => {
+        if (block.startsWith('```')) {
+          const lines = block.split('\n');
+          const lang  = lines[0].replace('```', '').trim();
+          const code  = lines.slice(1).filter(l => l !== '```').join('\n');
+          return `<pre${lang ? ` data-lang="${escAttr(lang)}"` : ''}><code>${escHtml(code)}</code></pre>`;
+        }
+        /* Inline HTML (links, <code>, <em>, etc.) already in the data is passed through */
+        return `<p>${block.trim()}</p>`;
+      }).join('');
+    }
+
+    function escHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function escAttr(str) {
+      return str.replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>

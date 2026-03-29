@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debug Diary — Home</title>
+  <meta name="description" content="A collection of bugs that made me question my career choices, my life decisions, and occasionally the laws of physics." />
+
+  <!-- Google Fonts: monospace + sans-serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">~/debug-diary</a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">[home]</a></li>
+        <li><a href="logs.html">[logs]</a></li>
+        <li><a href="about.html">[about]</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section class="hero container">
+    <div class="prompt-line">$ cat welcome.txt</div>
+    <h1 class="hero-title">
+      &gt;&nbsp;debug_diary.init()<span class="cursor"></span>
+    </h1>
+    <p class="hero-subtitle">
+    This is not a tutorial. This is not a guide.
+
+    This is a record of things that broke, made no sense, and somehow still worked after hours of suffering.
+
+    Every log is real. Every bug was personal.
+    </p>
+
+    <p style="margin-top: 12px; color: #5c8f6b; font-size: 0.8rem;">
+    // documenting bugs before they erase my memory of how I fixed them
+    </p>
+
+    <!-- Random quote — populated by JS -->
+    <div class="quote-box">
+      <div class="quote-label">$ random_thought --debug</div>
+      <blockquote class="quote-text" id="random-quote"></blockquote>
+    </div>
+  </section>
+
+  <!-- ── Recent Logs ── -->
+  <section class="container page-bottom" style="padding-top: 0;">
+    <div class="section-header">
+      <span class="section-label">$ ls -lt logs/ | head -3</span>
+      <a href="logs.html" class="view-all-link">view all →</a>
+    </div>
+
+    <!-- Cards populated by JS -->
+    <div class="logs-grid" id="recent-logs"></div>
+  </section>
+
+  <script src="js/logs.js"></script>
+  <script>
+    /* ── Random Quote ── */
+    const quoteEl = document.getElementById('random-quote');
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
+    let i = 0;
+    quoteEl.textContent = '"';
+
+    function typeQuote() {
+     if (i < randomQuote.length) {
+      quoteEl.textContent += randomQuote.charAt(i);
+      i++;
+      setTimeout(typeQuote, 20);
+     }
+     else {
+     quoteEl.textContent += '"';
+     }
+    }
+
+    typeQuote();
+
+    /* ── Render 3 recent log cards ── */
+    const recentLogs   = logs.slice(0, 3);
+    const recentGrid   = document.getElementById('recent-logs');
+    recentGrid.innerHTML = recentLogs.map(renderCard).join('');
+
+    function renderCard(log) {
+      return `
+        <a class="log-card" href="log.html?id=${log.id}">
+          <div class="log-card-inner">
+            <span class="log-emoji">${log.emoji}</span>
+            <div class="log-body">
+              <div class="log-title-row">
+                <span class="log-title">${escHtml(log.title)}</span>
+                <span class="status-badge ${log.status}">${log.status}</span>
+              </div>
+              <p class="log-teaser">${escHtml(log.teaser)}</p>
+              <div class="log-meta">
+                <div class="tag-list">
+                  ${log.tags.map(t => `<span class="tag">#${escHtml(t)}</span>`).join('')}
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>`;
+    }
+
+    /* Minimal HTML escaping for plain strings */
+    function escHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>

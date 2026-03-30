@@ -21,7 +21,7 @@ This project is intended for personal exploration and learning. While the site i
 
 ## Deployment
 
-The site is deployed on Vercel: https://debug-diary-kappa.vercel.com/
+The site is deployed on Vercel: https://debug-diary-kappa.vercel.app
 
 Changes pushed to the repository are automatically deployed through GitHub integration.
 

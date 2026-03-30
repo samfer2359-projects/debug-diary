@@ -4,23 +4,33 @@ A minimal creative website capturing the emotional side of debugging — the fru
 
 ## About
 
-Debug Diary is an experimental project showcasing personal coding exploration and the use of AI tools. It is intended for learning, reflection, and documenting the journey, not for public use or redistribution.
+Debug Diary is an experimental project exploring the human side of programming. The core idea and all written content are original, focusing on personal reflections and real debugging experiences.
+
+The development process involved the use of AI tools to assist with debugging, code generation, and iterative improvements.
 
 ## Features
 
-- Simple, clean design  
-- Focus on documenting debugging experiences  
-- Built with Replit, HTML, CSS, and ChatGPT  
-- AI-assisted development
+- Minimal, distraction-free design  
+- Focus on real debugging experiences  
+- Built with HTML, CSS, and Replit  
+- AI-assisted development for code generation and refinement  
 
 ## Usage
 
-This website is for personal learning and experimentation only. It is intended to remain anonymous and is **not licensed for public use**.
+This project is intended for personal exploration and learning. While the site is publicly accessible, its content and concept are not open for reuse or redistribution without explicit permission.
 
 ## Deployment
 
-The site is deployed on [Vercel](https://debug-diary.vercel.com/) for live preview. With GitHub integration, any changes pushed to the repository automatically update the live site.
+The site is deployed on Vercel: https://debug-diary-kappa.vercel.com/
 
-## Rights
+Changes pushed to the repository are automatically deployed through GitHub integration.
 
-All rights reserved. This project is personal and unpublished; no part may be copied, distributed, or used without explicit permission.
+## Notes
+
+This project is a work in progress and will continue to evolve as part of ongoing learning and experimentation.
+
+## License
+
+All rights reserved. The idea, content, and presentation are original. Code may include AI-assisted contributions, but the project as a whole is not licensed for reuse.
+
+All rights reserved. The idea, content, and presentation are original. Code may include AI-assisted contributions, but the project as a whole is not licensed for reuse.

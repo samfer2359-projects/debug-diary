@@ -1,36 +1,50 @@
 # Debug Diary
 
-A minimal creative website capturing the emotional side of debugging — the frustrations, struggles, and small wins behind coding.
+A minimal web-based project that documents the debugging process, capturing both the technical challenges and the thought process behind solving them.
 
-## About
+---
 
-Debug Diary is an experimental project exploring the human side of programming. The core idea and all written content are original, focusing on personal reflections and real debugging experiences.
+## Overview
 
-The development process involved the use of AI tools to assist with debugging, code generation, and iterative improvements.
+Debug Diary is an experimental personal project focused on exploring how developers think, debug, and improve over time. It combines content with a clean user interface to create a simple, readable experience.
+
+---
 
 ## Features
 
-- Minimal, distraction-free design  
-- Focus on real debugging experiences  
-- Built with HTML, CSS, and Replit  
-- AI-assisted development for code generation and refinement  
+- Minimal, distraction-free UI  
+- Structured debugging entries and reflections  
+- Fully deployed and accessible online  
+- Integrated analytics for tracking user interaction  
 
-## Usage
+---
 
-This project is intended for personal exploration and learning. While the site is publicly accessible, its content and concept are not open for reuse or redistribution without explicit permission.
+## Tech Stack
 
-## Deployment
+- HTML, CSS  
+- Deployment: Vercel  
+- Analytics: Google Analytics, Google Search Console  
 
-The site is deployed on Vercel: https://debug-diary-kappa.vercel.app
+---
 
-Changes pushed to the repository are automatically deployed through GitHub integration.
+## Live Demo
+
+https://debug-diary-kappa.vercel.app
+
+---
+
+## Purpose
+
+This project serves both as:
+- a personal space to document debugging experiences  
+- a front-end experiment in layout, deployment, and user interaction tracking  
+
+---
+
 
 ## Notes
 
-This project is a work in progress and will continue to evolve as part of ongoing learning and experimentation.
+This is an ongoing project and will continue evolving with additional features and improvements.
+## Notes
 
-## License
-
-All rights reserved. The idea, content, and presentation are original. Code may include AI-assisted contributions, but the project as a whole is not licensed for reuse.
-
-All rights reserved. The idea, content, and presentation are original. Code may include AI-assisted contributions, but the project as a whole is not licensed for reuse.
+This is an ongoing project and will continue evolving with additional features and improvements.

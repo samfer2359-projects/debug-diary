@@ -45,6 +45,4 @@ This project serves both as:
 ## Notes
 
 This is an ongoing project and will continue evolving with additional features and improvements.
-## Notes
 
-This is an ongoing project and will continue evolving with additional features and improvements.

@@ -1,8 +1,3 @@
-/* =============================================================
-   logs.js — Edit this file to add, remove, or modify bug logs.
-   Each object in the `logs` array is one diary entry.
-   ============================================================= */
-
 const logs = [
   {
     id: "cout-vs-count",
@@ -358,10 +353,7 @@ Then it hit me: the platform was wrong. The application simply wasn’t meant to
   
 ];
 
-/* -------------------------------------------------------
-   Dark-humored developer quotes — shown randomly on home.
-   Add your own here.
-------------------------------------------------------- */
+
 const quotes = [
   "It works on my machine. Ship the machine.",
   "Writing code is like cooking without a recipe — sometimes it’s edible, sometimes it’s a fire alarm.",

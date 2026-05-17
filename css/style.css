@@ -1,15 +1,10 @@
-/* =============================================================
-   Debug Diary — style.css
-   Modify CSS variables at the top to retheme the site easily.
-   ============================================================= */
-
 /* ── Theme Variables ──────────────────────────────────────── */
 :root {
   /* Colors */
   --bg:           #0d0d0d;
   --bg-card:      #111111;
   --bg-card-alt:  #0a110a;
-  --accent:       #4ade80;   /* neon green — change this to retheme */
+  --accent:       #4ade80;   
   --accent-dim:   #22c55e;
   --accent-muted: #16a34a;
   --accent-dark:  #166534;
